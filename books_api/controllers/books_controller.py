@@ -24,7 +24,7 @@ def add_book(payload: BookCreate):
 
     try:
         return create_book(payload)
-    except ValueError as ve:                  # known business error
+    except ValueError as ve:                  
         raise HTTPException(status_code=409, detail=str(ve))
     except Exception:
         raise HTTPException(status_code=500, detail="Error creating book")
