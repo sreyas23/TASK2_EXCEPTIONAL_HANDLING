@@ -14,7 +14,7 @@ def list_books():
 
 @router.post("/books", response_model=Book, status_code=201)
 def add_book(payload: BookCreate):
-    # basic controller-level validation (keep it simple)
+
     if not payload.title or not payload.title.strip():
         raise HTTPException(status_code=400, detail="Title is required")
     if not payload.author or not payload.author.strip():
