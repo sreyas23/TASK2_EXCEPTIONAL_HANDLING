@@ -14,10 +14,8 @@ def _next_id() -> int:
     return max((b.id for b in _DB), default=0) + 1
 
 def create_book(payload: BookCreate) -> Book:
-    # duplicate check (business rule)
     if any(b.title == payload.title and b.author == payload.author and b.year == payload.year for b in _DB):
         raise ValueError("book already exists")
-    # NOTE: if you're on Pydantic v2, use payload.model_dump()
     book = Book(id=_next_id(), **payload.dict())
     _DB.append(book)
     return book
